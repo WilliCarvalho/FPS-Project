@@ -1497,6 +1497,26 @@ PrefabInstance:
       propertyPath: cam
       value: 
       objectReference: {fileID: 1269701019}
+    - target: {fileID: 4641290283909037529, guid: 14616f850af4db2458d5855725ae2d0b,
+        type: 3}
+      propertyPath: maxAmmoInMagazine
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 4641290283909037529, guid: 14616f850af4db2458d5855725ae2d0b,
+        type: 3}
+      propertyPath: ammoInMagazine
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 4641290283909037529, guid: 14616f850af4db2458d5855725ae2d0b,
+        type: 3}
+      propertyPath: ammo
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 4641290283909037529, guid: 14616f850af4db2458d5855725ae2d0b,
+        type: 3}
+      propertyPath: timeToReload
+      value: 120
+      objectReference: {fileID: 0}
     - target: {fileID: 8516998714735742917, guid: 14616f850af4db2458d5855725ae2d0b,
         type: 3}
       propertyPath: m_LocalPosition.x

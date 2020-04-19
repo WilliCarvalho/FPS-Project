@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Gun : MonoBehaviour
 {
-    //Gun configurartion
+    [Header("Gun configurartion")]
     public float damage;
     public float range;
     public float firerate;
@@ -13,6 +13,16 @@ public class Gun : MonoBehaviour
     public ParticleSystem ammoParticle;
     public GameObject impact;
     public bool hold = false;
+    
+    [Space]
+    [Header("Ammo")]
+    public int maxAmmoInMagazine;
+    public int ammoInMagazine;
+    public int ammo;
+    public int timeToReload;
+    private int timeTr;
+
+    private bool reload = false;
 
     // Update is called once per frame
     void Update()
@@ -27,20 +37,53 @@ public class Gun : MonoBehaviour
             hold = false;
         }
 
-        if (hold == true)
+        if (hold == true && ammoInMagazine > 0)
         {
             waitToFirerate += 1;
         }
 
-        if (waitToFirerate > firerate)
+        if (waitToFirerate > firerate && ammoInMagazine > 0)
         {
             Shoot();
         }
+
+        if (Input.GetButtonDown("Reload") && ammoInMagazine != maxAmmoInMagazine && ammo != 0 && reload == false)
+        {
+            reload = true;
+        }
+
+        if(reload == true)
+        {
+            if(timeTr > timeToReload)
+            {
+                for (int i = 0; i < maxAmmoInMagazine; i++)
+                {
+                    if(ammoInMagazine < maxAmmoInMagazine && ammo > 0)
+                    {
+                        ammo -= 1;
+                        ammoInMagazine += 1;
+                    }
+                    else
+                    {
+                        break;
+                    }
+                    reload = false;
+                    timeTr = 0;
+                }
+            }
+            else
+            {
+                timeTr += 1;
+            }
+        }
     }
+
+
 
     void Shoot()
     {
         waitToFirerate = 0;
+        ammoInMagazine -= 1;
         ammoParticle.Play();
         RaycastHit hit;
         if(Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, range))
