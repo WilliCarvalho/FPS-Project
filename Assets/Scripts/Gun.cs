@@ -47,6 +47,12 @@ public class Gun : MonoBehaviour
         {
             Debug.Log("Aiming on: " + hit.transform);
 
+            ObjectDestroyable od = hit.transform.GetComponent<ObjectDestroyable>();
+            if(od != null)
+            {
+                od.TakeDamage(damage);
+            }
+
             GameObject impactGo = Instantiate(impact, hit.point, Quaternion.LookRotation(hit.normal));
         }
     }
