@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Gun : MonoBehaviour
 {
@@ -21,12 +22,24 @@ public class Gun : MonoBehaviour
     public int ammo;
     public int timeToReload;
     private int timeTr;
-
     private bool reload = false;
+
+    [Space]
+    [Header("Canvas")]
+    public Text ammoTxt;
+    public Slider showReload;
+    public GameObject rechargeGo;
+
+    private void Start()
+    {
+        showReload.maxValue = timeToReload;
+    }
 
     // Update is called once per frame
     void Update()
     {
+        showReload.value = timeTr;
+        ammoTxt.text = ammoInMagazine + "/" + ammo;
         if (Input.GetButtonDown("Fire1"))
         {
             hold = true;
@@ -49,6 +62,7 @@ public class Gun : MonoBehaviour
 
         if (Input.GetButtonDown("Reload") && ammoInMagazine != maxAmmoInMagazine && ammo != 0 && reload == false)
         {
+            rechargeGo.SetActive(true);
             reload = true;
         }
 
@@ -69,6 +83,7 @@ public class Gun : MonoBehaviour
                     }
                     reload = false;
                     timeTr = 0;
+                    rechargeGo.SetActive(false);
                 }
             }
             else
